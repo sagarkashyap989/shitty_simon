@@ -7,6 +7,23 @@ var userClickedPattern =[];
 var started = false;
 var level = 0;
 
+$("#refresh").click(function(){
+level=0;
+gamePattern=[];
+    nextsequence();
+
+});
+
+$("body").click(function(){
+
+  if (!started) {
+        $("#level-title").text("Level " + level);
+    nextsequence();
+    started = true;
+  }
+});
+
+
 $(document).keypress(function() {
   if (!started) {
         $("#level-title").text("Level " + level);
@@ -55,13 +72,16 @@ if (b === t){        //5. Call nextSequence() after a 1000 millisecond delay.
     } else {
 
         $("body").addClass("game-over");
+        $("body").removeClass("background");
 
         var audio = new Audio("sounds/wrong.mp3");
         audio.play();
       setTimeout(function () {
         $("body").removeClass("game-over");
+        $("body").addClass("background");
+
       }, 200);
-      $("#level-title").text("Game Over, Press Any Key to Restart");
+      $("#level-title").text("Game Over, Click restart key, to Restart");
 
       $(document).keypress(function() {
    level=0;
